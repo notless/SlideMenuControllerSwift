@@ -343,6 +343,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
             return
         }
         
+        guard let _ = leftViewController else { // If leftViewController is nil, then return
+            return
+        }
+
         switch panGesture.state {
             case UIGestureRecognizerState.Began:
                 if LeftPanState.lastState != .Ended &&  LeftPanState.lastState != .Cancelled &&  LeftPanState.lastState != .Failed {
@@ -422,6 +426,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
             return
         }
         
+        guard let _ = rightViewController else { // If rightViewController is nil, then return
+            return
+        }
+
         switch panGesture.state {
         case UIGestureRecognizerState.Began:
             if RightPanState.lastState != .Ended &&  RightPanState.lastState != .Cancelled &&  RightPanState.lastState != .Failed {
