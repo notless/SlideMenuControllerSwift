@@ -68,11 +68,23 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     public var mainContainerView = UIView()
     public var leftContainerView = UIView()
     public var rightContainerView =  UIView()
-    public var mainViewController: UIViewController?
-    public var leftViewController: UIViewController?
+    public var mainViewController: UIViewController? {
+        didSet {
+            initView()
+        }
+    }
+    public var leftViewController: UIViewController? {
+        didSet {
+            initView()
+        }
+    }
     public var leftPanGesture: UIPanGestureRecognizer?
     public var leftTapGesture: UITapGestureRecognizer?
-    public var rightViewController: UIViewController?
+    public var rightViewController: UIViewController? {
+        didSet {
+            initView()
+        }
+    }
     public var rightPanGesture: UIPanGestureRecognizer?
     public var rightTapGesture: UITapGestureRecognizer?
     
