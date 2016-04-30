@@ -35,6 +35,8 @@ public struct SlideMenuOptions {
     public static var pointOfNoReturnWidth: CGFloat = 44.0
     public static var simultaneousGestureRecognizers: Bool = true
 	public static var opacityViewBackgroundColor: UIColor = UIColor.blackColor()
+    public static var leftPanEnabled: Bool = true
+    public static var rightPanEnabled: Bool = true
 }
 
 public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
@@ -346,6 +348,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     }
     
     func handleLeftPanGesture(panGesture: UIPanGestureRecognizer) {
+
+        guard SlideMenuOptions.leftPanEnabled else {
+            return
+        }
         
         if !isTagetViewController() {
             return
@@ -430,6 +436,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     
     func handleRightPanGesture(panGesture: UIPanGestureRecognizer) {
         
+        guard SlideMenuOptions.rightPanEnabled else {
+            return
+        }
+
         if !isTagetViewController() {
             return
         }
