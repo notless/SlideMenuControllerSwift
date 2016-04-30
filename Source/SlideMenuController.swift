@@ -37,6 +37,8 @@ public struct SlideMenuOptions {
 	public static var opacityViewBackgroundColor: UIColor = UIColor.blackColor()
     public static var leftPanEnabled: Bool = true
     public static var rightPanEnabled: Bool = true
+    public static var leftSlideMenuEnabled: Bool = true
+    public static var rightSlideMenuEnabled: Bool = true
 }
 
 public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
@@ -70,23 +72,11 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     public var mainContainerView = UIView()
     public var leftContainerView = UIView()
     public var rightContainerView =  UIView()
-    public var mainViewController: UIViewController? {
-        didSet {
-            initView()
-        }
-    }
-    public var leftViewController: UIViewController? {
-        didSet {
-            initView()
-        }
-    }
+    public var mainViewController: UIViewController?
+    public var leftViewController: UIViewController?
     public var leftPanGesture: UIPanGestureRecognizer?
     public var leftTapGesture: UITapGestureRecognizer?
-    public var rightViewController: UIViewController? {
-        didSet {
-            initView()
-        }
-    }
+    public var rightViewController: UIViewController?
     public var rightPanGesture: UIPanGestureRecognizer?
     public var rightTapGesture: UITapGestureRecognizer?
     
@@ -219,6 +209,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
             return
         }
         
+        guard SlideMenuOptions.leftSlideMenuEnabled else {
+            return
+        }
+        
         self.delegate?.leftWillOpen?()
         
         setOpenWindowLevel()
@@ -234,6 +228,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
             return
         }
         
+        guard SlideMenuOptions.rightSlideMenuEnabled else {
+            return
+        }
+
         self.delegate?.rightWillOpen?()
         
         setOpenWindowLevel()
@@ -349,7 +347,7 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     
     func handleLeftPanGesture(panGesture: UIPanGestureRecognizer) {
 
-        guard SlideMenuOptions.leftPanEnabled else {
+        guard SlideMenuOptions.leftSlideMenuEnabled && SlideMenuOptions.leftPanEnabled else {
             return
         }
         
@@ -436,7 +434,7 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     
     func handleRightPanGesture(panGesture: UIPanGestureRecognizer) {
         
-        guard SlideMenuOptions.rightPanEnabled else {
+        guard SlideMenuOptions.rightSlideMenuEnabled && SlideMenuOptions.rightPanEnabled else {
             return
         }
 
